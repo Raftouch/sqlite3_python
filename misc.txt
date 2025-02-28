@@ -1,0 +1,4 @@
+text (string)
+integer (int)
+real (float)
+blob (binary)
