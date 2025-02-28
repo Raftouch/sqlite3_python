@@ -3,7 +3,7 @@ import sqlite3
 connection = sqlite3.connect("gta.db")
 cursor = connection.cursor()
 
-cursor.execute("create table if not exists gta (year integer, name text, city text)")
+cursor.execute("CREATE TABLE IF NOT EXISTS gta (year INTEGER, name TEXT, city TEXT)")
 
 release_list = [
     (2000, "The Dreamers", "New York"),
@@ -16,9 +16,14 @@ release_list = [
     (2015, "Echoes of the Past", "Sydney")
 ]
 
-cursor.executemany("insert into gta values (?,?,?)", release_list)
+cursor.executemany("INSERT INTO gta VALUES (?,?,?)", release_list)
 
-for row in cursor.execute("select * from gta"):
+for row in cursor.execute("SELECT * FROM gta"):
     print(row)
+
+print("****************************")
+cursor.execute("SELECT * FROM gta WHERE city=:c", {"c": "Paris"})
+gta_search = cursor.fetchall()
+print(gta_search)
 
 connection.close()
